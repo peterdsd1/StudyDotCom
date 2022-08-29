@@ -1,0 +1,229 @@
+package cs201;
+
+/* 
+NOTE TO REVIEWER: Directions in Part 1 (labeled with a prefix of P1 in the comments below) of the prompt 
+says to display the current contents of the array, then to display the contents after a bubble sort. 
+I realize that this assignment is trying to ask the user to answer as many state capitals and to prompt 
+for the total correct answers. 
+
+Since the assignment wants me to display all of the answers first, we can officially begin 
+the game AFTER I display all of the states and its capitals
+ 
+*/
+
+
+import java.util.*;
+
+
+
+public class Main {
+   public static void main (String [] args) {
+       
+   	Scanner answer = new Scanner(System.in);
+   	System.out.println("Your score is " + data(answer));
+   }
+   	//P1: 50 States and Capitals are sorted in a two-dimensional array in order by state name.
+   	public static int data(Scanner input) {
+   	String [][] stateCapital = {
+   			{ "Alabama", "Montgomery" },
+   			{ "Alaska", "Juneau" },
+   			{ "Arizona", "Phoenix" },
+   			{ "Arkansas", "Little Rock" },
+   			{ "California", "Sacramento" },
+   			{ "Colorado", "Denver" },
+   			{ "Connecticut", "Hartford" },
+   			{ "Delaware", "Dover" },
+   			{ "Florida", "Tallahassee" },
+   			{ "Georgia", "Atlanta" },
+   			{ "Hawaii", "Honolulu" },
+   			{ "Idaho", "Boise" },
+   			{ "Illinois", "Springfield" },
+   			{ "Indiana", "Indianapolis" },
+   			{ "Iowa", "Des Moines" },
+   			{ "Kansas", "Topeka" },
+   			{ "Kentucky", "Frankfort" },
+   			{ "Louisiana", "Baton Rouge" },
+   			{ "Maine", "Augusta" },
+   			{ "Maryland", "Annapolis" },
+   			{ "Massachusetts", "Boston" },
+   			{ "Michigan", "Lansing" },
+   			{ "Minnesota", "Saint Paul" },
+   			{ "Mississippi", "Jackson" },
+   			{ "Missouri", "Jefferson City" },
+   			{ "Montana", "Helena" },
+   			{ "Nebraska", "Lincoln" },
+   			{ "Nevada", "Carson City" },
+   			{ "New Hampshire", "Concord" },
+   			{ "New Jersey", "Trenton" },
+   			{ "New Mexico", "Santa Fe" },
+   			{ "New York", "Albany" },
+   			{ "North Carolina", "Raleigh" },
+   			{ "North Dakota", "Bismarck" },
+   			{ "Ohio", "Columbus" },
+   			{ "Oklahoma", "Oklahoma City" },
+   			{ "Oregon", "Salem" },
+   			{ "Pennsylvania", "Harrisburg" },
+   			{ "Rhode Island", "Providence" },
+   			{ "South Carolina", "Columbia" },
+   			{ "South Dakota", "Pierre" },
+   			{ "Tennessee", "Nashville" },
+   			{ "Texas", "Austin" },
+   			{ "Utah", "Salt Lake City" },
+   			{ "Vermont", "Montpelier" },
+   			{ "Virginia", "Richmond" },
+   			{ "Washington", "Olympia" },
+   			{ "West Virginia", "Charleston" },
+   			{ "Wisonsin", "Madison" },
+   			{ "Wyoming", "Cheyenne" },
+	
+   	};
+   	
+   	//P1: Display current contents of the array
+   	
+   	System.out.println("========== STATES & IT'S CAPITAL ==========\n");
+   		for (int i = 0; i < stateCapital.length; i++) {
+   			System.out.println(stateCapital[i][0] + ", " + stateCapital[i][1]);
+   		};	
+   			
+   	//P1: Bubble sort to sort content by Capital
+   	
+   		System.out.println("\n========== STATES SORTED BY IT'S CAPITAL ==========\n");
+   			
+       	bubbleSort(stateCapital);
+       	for (int i = 0; i < stateCapital.length; i++) {
+       		System.out.println(stateCapital[i][0] + ", " + stateCapital[i][1]);
+   		};
+   		
+   		
+   	//P1: This is the start of our official program where we ask the user to enter answers for all state capitals
+   	
+   	   System.out.println("\n========================================");
+   	   System.out.println("\n========================================");
+   	   System.out.println("\nWELCOME TO THE US STATES & CAPITAL GAME");
+   	   System.out.println("\n========================================");
+   	   System.out.println("\n========================================");
+   	   
+   	   System.out.println("\nAnswer as many Capitals as you can for each State.\nYour score will be shown at the end of the program");
+   	   
+   	/* The assignment did not specifically ask for which state to start with or their order,
+   	 So I will just go by the ascending order from the bubble sort.
+   	 */
+   	
+   	   //Start the count at 0 and add to the score as users answer correctly
+   	   int count = 0;
+   			   
+   	   for (int i = 0; i < stateCapital.length; i++) {
+   		   System.out.println("\nWhat is the Capital of " + stateCapital[i][0] + "? ");
+   		   /*Get the input from the user and convert it to lower case. Take the answer from the array and convert it
+   		    to lower case as well to match. If answer is correct, increment the score. If not, give user the answer.
+   		    */
+   		   if (input.nextLine().toLowerCase().equals(stateCapital[i][1].toLowerCase())) {
+   			   System.out.println("That's correct!");
+   			   count++;
+   		   } else {
+   			   System.out.println("\nSorry, the correct answer is " + stateCapital[i][1]);
+   		   } 
+   	   }
+   	   
+   	   
+   	   /* Part 2 of the assignment: 
+   	 */
+   	   
+   	   
+   	   
+   	   
+   	   	   
+   	   HashMap<String, String> capitalMap = new HashMap<String, String>(stateCapital.length);
+   	   for (int i = 0; i < stateCapital.length; i++) {
+   		   capitalMap.put(stateCapital[i][0], stateCapital[i][1]);
+   	   }
+   	   
+   	   System.out.println("\n========== HASH MAP ==========\n");
+   	   for (String key : capitalMap.keySet()) {
+   		   System.out.println("The Capital of " + key + " is " + capitalMap.get(key));
+   	   }
+   	   
+   	   
+   	   
+   	   Map<String, String> capitalTree = new TreeMap<String, String>(capitalMap);
+   	  
+   	   
+   	   
+   	   boolean endLoop = false;
+   	   Scanner lScanner = new Scanner(System.in);
+   	   
+   	   
+   	   System.out.println("\n========================================");
+   	   System.out.println("\nGOOD JOB!");
+   	   System.out.println("\nLet's try something different..");
+   	   System.out.println("\nThis time you list the State");
+   	   System.out.println("\nAnd I'll name you the Capital..");
+   	   System.out.println("\n========================================");
+   	   System.out.println("\nNote: You can enter the command 'quit' to exit.");
+   	   
+   	   endLoop = false;
+   	   while (!endLoop) {
+   		   System.out.println("Name any State: ");
+   		   String lInput = lScanner.nextLine();
+   		   if (lInput.equalsIgnoreCase("quit")) {
+   			   System.out.println("Exiting..");
+   			   endLoop = true;
+   			   continue;
+   			   
+   		   }
+
+   		   if (capitalTree.containsKey(lInput)) {
+   			   System.out.println("\nThe Capital of " + lInput + " is " + capitalTree.get(lInput));
+   		   } else {
+   			   System.out.println("Sorry, I don't recognize that state. Please enter a US State: \n");
+   		   }	
+
+   	   }	   
+   	   
+   	   
+   	   return count;
+   	
+
+
+   	
+
+   	}
+   	
+   	
+   	
+
+   	
+	   
+   			
+   	//P1: Bubble sort to sort content by Capital
+   	
+   	public class IgnoreCaseComparator implements Comparator<String> {
+   		   public static final IgnoreCaseComparator INSTANCE = new IgnoreCaseComparator();
+   		   
+   		   public int compare(String first, String second) {
+   			return first.compareToIgnoreCase(second);
+   		   }
+   	}
+
+
+   public static void bubbleSort(String[][] arr) {
+      for(int i = 0; i < arr.length - 1; i++){
+   	   for(int j = 0; j < arr.length - i - 1; j++) {
+               if(arr[j][1].compareTo(arr[j + 1][1]) > 0)  {
+                   String[] temp = arr[j];
+                  arr[j] = arr[j + 1];
+                   arr[j + 1] = temp;
+               }
+          }
+   	}
+   	
+   }
+   
+   
+
+}
+
+	
+
+
+
